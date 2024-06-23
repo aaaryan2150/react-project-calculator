@@ -1,35 +1,65 @@
-import React from 'react'
+import {React, useState,useMemo} from 'react'
 
 const App = () => {
+  const [insetValue,setInsertValue] = useState("");
+  const [displayValue, setDisplayValue] = useState("");
+
+  const AddChar = (text)=>{
+    setInsertValue(c => c + text)
+    setDisplayValue(c => c + text)
+
+  };
+
+  const HandleOperation= (text)=>{
+    setInsertValue(c => c + text)
+    setDisplayValue("")
+  };
+  
+  const clearSpace = () =>{
+    setInsertValue("")
+    setDisplayValue("")
+  }
+
+  const HandleCalculate = () =>{
+    console.log(insetValue)
+    let finalvalue = eval(insetValue)
+    setDisplayValue(finalvalue)
+  };
+  
+
   return (
-    <div class="bg-gray-100 flex items-center justify-center min-h-screen">
-      <div class="bg-white p-6 rounded-lg shadow-lg w-80">
-        <div class="mb-4">
+    <div className="bg-gray-100 flex items-center justify-center min-h-screen">
+      <div className="bg-white p-6 rounded-lg shadow-lg w-80">
+        <div className="mb-4">
             <input
                 type="text"
                 id="display"
-                readonly
-                class="w-full bg-gray-200 p-3 rounded text-right text-2xl font-digital-7"
+                value={displayValue}
+                readOnly
+                className="w-full bg-gray-200 p-3 rounded text-right text-2xl font-digital-7"
             />
         </div>
-        <div class="grid grid-cols-4 gap-2">
-            <button class="bg-blue-500 text-white p-4 rounded text-xl">7</button>
-            <button class="bg-blue-500 text-white p-4 rounded text-xl">8</button>
-            <button class="bg-blue-500 text-white p-4 rounded text-xl">9</button>
-            <button class="bg-blue-500 text-white p-4 rounded text-xl">/</button>
-            <button class="bg-blue-500 text-white p-4 rounded text-xl">4</button>
-            <button class="bg-blue-500 text-white p-4 rounded text-xl">5</button>
-            <button class="bg-blue-500 text-white p-4 rounded text-xl">6</button>
-            <button class="bg-blue-500 text-white p-4 rounded text-xl">*</button>
-            <button class="bg-blue-500 text-white p-4 rounded text-xl">1</button>
-            <button class="bg-blue-500 text-white p-4 rounded text-xl">2</button>
-            <button class="bg-blue-500 text-white p-4 rounded text-xl">3</button>
-            <button class="bg-blue-500 text-white p-4 rounded text-xl">-</button>
-            <button class="bg-blue-500 text-white p-4 rounded text-xl">0</button>
-            <button class="bg-blue-500 text-white p-4 rounded text-xl">.</button>
-            <button class="bg-blue-500 text-white p-4 rounded text-xl">=</button>
-            <button class="bg-blue-500 text-white p-4 rounded text-xl">+</button>
-            <button class="bg-red-500 text-white p-4 rounded text-xl col-span-2">C</button>
+        <div className="grid grid-cols-4 gap-2">
+            <button className="bg-blue-500 text-white p-4 rounded text-xl" onClick={()=> AddChar("7")}>7</button>
+            <button className="bg-blue-500 text-white p-4 rounded text-xl" onClick={()=> AddChar("8")}>8</button>
+            <button className="bg-blue-500 text-white p-4 rounded text-xl" onClick={()=> AddChar("9")}>9</button>
+            <button className="bg-blue-500 text-white p-4 rounded text-xl" onClick={()=> HandleOperation("/")}>/</button>
+            <button className="bg-blue-500 text-white p-4 rounded text-xl" onClick={()=> AddChar("4")}>4</button>
+            <button className="bg-blue-500 text-white p-4 rounded text-xl" onClick={()=> AddChar("5")}>5</button>
+            <button className="bg-blue-500 text-white p-4 rounded text-xl" onClick={()=> AddChar("6")}>6</button>
+            <button className="bg-blue-500 text-white p-4 rounded text-xl" onClick={()=> HandleOperation("*")}>*</button>
+            <button className="bg-blue-500 text-white p-4 rounded text-xl" onClick={()=> AddChar("1")}>1</button>
+            <button className="bg-blue-500 text-white p-4 rounded text-xl" onClick={()=> AddChar("2")}>2</button>
+            <button className="bg-blue-500 text-white p-4 rounded text-xl" onClick={()=> AddChar("3")}>3</button> 
+            <button className="bg-blue-500 text-white p-4 rounded text-xl" onClick={()=> HandleOperation("-")}>-</button>
+            <button className="bg-blue-500 text-white p-4 rounded text-xl" onClick={()=> AddChar("0")}>0</button>
+            <button className="bg-blue-500 text-white p-4 rounded text-xl" onClick={()=> AddChar(".")}>.</button>
+            <button className="bg-blue-500 text-white p-4 rounded text-xl" onClick={()=> HandleCalculate()}>=</button>
+            <button className="bg-blue-500 text-white p-4 rounded text-xl" onClick={()=> HandleOperation("+")}>+</button>
+            <button className="bg-red-500 text-white p-4 rounded text-xl col-span-2" onClick={()=> clearSpace()}>C</button>
+            <button className="bg-blue-500 text-white p-4 rounded text-xl" onClick={()=> AddChar("(")}>(</button>
+            <button className="bg-blue-500 text-white p-4 rounded text-xl" onClick={()=> AddChar(")")}>)</button>
+
         </div>
     </div>
   </div>
