@@ -20,10 +20,16 @@ const App = () => {
     setDisplayValue("")
   }
 
-  const HandleCalculate = () =>{
-    console.log(insetValue)
-    let finalvalue = eval(insetValue)
-    setDisplayValue(finalvalue)
+  
+
+  const HandleCalculate = () => {
+    try {
+      const finalValue = eval(insetValue);
+      setDisplayValue(finalValue);
+      setInsertValue(finalValue.toString());
+    } catch (error) {
+      setDisplayValue('Error');
+    }
   };
   
 
@@ -54,9 +60,9 @@ const App = () => {
             <button className="bg-blue-500 text-white p-4 rounded text-xl" onClick={()=> HandleOperation("-")}>-</button>
             <button className="bg-blue-500 text-white p-4 rounded text-xl" onClick={()=> AddChar("0")}>0</button>
             <button className="bg-blue-500 text-white p-4 rounded text-xl" onClick={()=> AddChar(".")}>.</button>
-            <button className="bg-blue-500 text-white p-4 rounded text-xl" onClick={()=> HandleCalculate()}>=</button>
+            <button className="bg-blue-500 text-white p-4 rounded text-xl" onClick={()=> clearSpace()} >C</button>
             <button className="bg-blue-500 text-white p-4 rounded text-xl" onClick={()=> HandleOperation("+")}>+</button>
-            <button className="bg-red-500 text-white p-4 rounded text-xl col-span-2" onClick={()=> clearSpace()}>C</button>
+            <button className="bg-red-500 text-white p-4 rounded text-xl col-span-2" onClick={()=> HandleCalculate()}>=</button>
             <button className="bg-blue-500 text-white p-4 rounded text-xl" onClick={()=> AddChar("(")}>(</button>
             <button className="bg-blue-500 text-white p-4 rounded text-xl" onClick={()=> AddChar(")")}>)</button>
 
